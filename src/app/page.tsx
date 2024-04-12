@@ -1,3 +1,11 @@
+import LoginPage from "@/components/pages/login"
+
+const Login = () => {
+  return <LoginPage />
+}
+
+export default Login;
+
 //https://eztrackr.app/boards/9bc53112-671d-46a9-b8f0-3c993660240a/board
 //https://app.tealhq.com/home
 //https://simplify.jobs/dashboard
@@ -5,10 +13,6 @@
 //https://console.aiven.io/account/a4a6d2c9ceec/project/japp-100424/services
 //https://www.youtube.com/watch?v=k1TL-AzavvY&ab_channel=CandDev
 //https://www.youtube.com/watch?v=bicCg4GxOP8&ab_channel=CandDev
-export default function Home() {
-  return (
-    <main>
-      casita
-    </main>
-  );
-}
+//https://dribbble.com/tags/todo_list
+//https://andela.com/blog-posts/structuring-your-react-application-atomic-design-principles
+
