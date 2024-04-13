@@ -22,10 +22,10 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ session }) => {
 
   return (
-    <div className='bg-black px-8 py-4 flex justify-between'>
+    <div className='bg-black px-8 h-[70px] flex justify-between items-center'>
       <Typography className='text-white cursor-pointer' variant="h1">jApp</Typography>
       <div className="flex items-center gap-4">
-        <Typography className='text-white hidden sm:block' variant="p">Bienvenido, <strong>{session.user?.name}</strong></Typography>
+        <Typography className='text-white hidden sm:block' variant="p">Bienvenid@ <strong>{session.user?.name}</strong></Typography>
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>

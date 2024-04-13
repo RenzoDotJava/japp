@@ -8,7 +8,7 @@ import { Typography } from "@/components/ui/typography";
 const LoginPage = () => {
 
   const logInWithGoogle = async () => {
-    await signIn("google", { callbackUrl: '/dashboard' })
+    await signIn("google", { callbackUrl: '/applications' })
   }
 
   return (

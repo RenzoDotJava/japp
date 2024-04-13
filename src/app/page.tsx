@@ -14,5 +14,4 @@ export default Login;
 //https://www.youtube.com/watch?v=k1TL-AzavvY&ab_channel=CandDev
 //https://www.youtube.com/watch?v=bicCg4GxOP8&ab_channel=CandDev
 //https://dribbble.com/tags/todo_list
-//https://andela.com/blog-posts/structuring-your-react-application-atomic-design-principles
 
