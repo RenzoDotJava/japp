@@ -1,10 +1,8 @@
 import LoginPage from "@/components/pages/login"
 
-const Login = () => {
+export default function Login() {
   return <LoginPage />
 }
-
-export default Login;
 
 //https://eztrackr.app/boards/9bc53112-671d-46a9-b8f0-3c993660240a/board
 //https://app.tealhq.com/home

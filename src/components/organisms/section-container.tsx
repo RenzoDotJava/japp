@@ -6,6 +6,9 @@ import { IoMdAdd } from 'react-icons/io'
 import { Typography } from '../ui/typography'
 import { Application, Id, Section } from '@/types'
 import ApplicationCard from '../molecules/application-card'
+import { Button } from '../ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import ApplicationModal from './application-modal';
 
 interface SectionContainerProps {
   section: Section
@@ -30,14 +33,19 @@ const SectionContainer: React.FC<SectionContainerProps> = ({ section, applicatio
       ref={setNodeRef}
       className="bg-gray-100 min-w-[250px] min-h-full border rounded-md p-4 flex flex-col relative"
     >
-      <div className="flex items-center justify-center sticky">
+      <div className="flex justify-between items-center sticky">
         <Typography className="font-medium text-black" variant="h4">{section.title}</Typography>
-        <button
-          className="rounded-full border border-primary text-primary bg-transparent hover:bg-primary hover:text-white p-0.5 absolute right-0 bottom-[3.5px]"
+        <ApplicationModal
+          className='min-h-8 min-w-8 px-2 py-1 rounded-full bg-primary text-primary-foreground hover:bg-primary/85'
+        >
+          <IoMdAdd className="min-h-4 min-w-4" />
+        </ApplicationModal>
+        {/* <Button
+          size={'xs'}
           onClick={() => addApplication(section.id)}
         >
           <IoMdAdd className="min-h-4 min-w-4" />
-        </button>
+        </Button> */}
       </div>
       <div className="flex flex-1 flex-col gap-3 mt-4 overflow-y-auto overflow-x-hidden">
         <SortableContext items={applicationsIds}>

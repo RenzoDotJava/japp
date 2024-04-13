@@ -38,7 +38,7 @@ const sections: Section[] = [
   }
 ]
 
-const ApplicationsPage = () => {
+export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([])
   const [activeApplication, setActiveApplication] = useState<Application | null>(null)
   const [activeSection, setActiveSection] = useState<Section | null>(null)
@@ -143,7 +143,5 @@ const ApplicationsPage = () => {
     </div>
   )
 }
-
-export default ApplicationsPage
 
 //https://www.youtube.com/watch?v=RG-3R6Pu_Ik&t=2107s&ab_channel=CodewithKliton
