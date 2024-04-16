@@ -1,16 +1,9 @@
 import React from 'react'
+import { MdWork, MdHomeWork } from "react-icons/md";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import { Typography } from '../ui/typography';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog"
 import { Application } from '../../types';
 import ApplicationModal from '../organisms/application-modal';
 
@@ -34,43 +27,37 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
 
   if (isDragging) {
     return (
-      <>
-        <div
-          ref={setNodeRef}
-          style={style}
-          className="bg-white shadow-sm p-2 rounded-md min-h-[45px] opacity-85"
-        />
-
-      </>
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="bg-white shadow-sm rounded-md min-h-[110px] opacity-85"
+      />
     )
   }
 
   return (
     <>
       <ApplicationModal
-        className='w-full bg-white shadow-sm p-2 min-h-[45px] flex rounded-md cursor-pointer'
+        className='w-full bg-white shadow-sm py-3 min-h-[110px] rounded-md cursor-pointer'
+        ref={setNodeRef}
         style={style}
         attributes={attributes}
         listeners={listeners}
       >
-        <Typography variant="p">{application.content}</Typography>
+        <div className='flex flex-col justify-center mx-4 gap-1 overflow-hidden'>
+          <Typography className='text-lg font-medium text-start truncate' variant="p">{application.content}</Typography>
+          <div className='flex items-center gap-2 '>
+            <MdWork />
+            <Typography className='text-start truncate' variant="p">
+              Google
+            </Typography>
+          </div>
+          <Typography className='flex items-center gap-2' variant="p">
+            <MdHomeWork />
+            Híbrido
+          </Typography>
+        </div>
       </ApplicationModal>
-      {/* <Dialog>
-        <DialogTrigger
-          className='w-full bg-white shadow-sm p-2 min-h-[45px] flex rounded-md cursor-pointer"'
-          ref={setNodeRef}
-          style={style}
-          {...attributes}
-          {...listeners}
-        >
-          <Typography variant="p">{application.content}</Typography>
-        </DialogTrigger>
-        <DialogContent className='w-[350px]'>
-          <DialogHeader>
-            <DialogTitle>Agregar postulación de trabajo</DialogTitle>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog> */}
     </>
   )
 }

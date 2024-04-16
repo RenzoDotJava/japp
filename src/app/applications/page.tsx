@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { createPortal } from "react-dom";
-import { DndContext, DragStartEvent, DragOverlay, DragEndEvent, useSensors, PointerSensor, useSensor, DragOverEvent } from "@dnd-kit/core"
+import { DndContext, DragStartEvent, DragOverlay, useSensors, PointerSensor, useSensor, DragOverEvent } from "@dnd-kit/core"
 import { arrayMove, SortableContext } from "@dnd-kit/sortable"
 
 import { Typography } from "@/components/ui/typography"
@@ -72,6 +72,8 @@ export default function ApplicationsPage() {
     }
   }
 
+  const onDragEnd = () => setActiveApplication(null)
+  
   const onDragOver = (event: DragOverEvent) => {
     const { active, over } = event;
 
@@ -98,7 +100,9 @@ export default function ApplicationsPage() {
       });
     }
 
-    if (isActiveApplication && !isOverApplication) {
+    const isOverSection = over.data.current?.type === "Section";
+
+    if (isActiveApplication && isOverSection) {
       setApplications((applications) => {
         const activeIndex = applications.findIndex(application => application.id === activeId);
 
@@ -112,7 +116,7 @@ export default function ApplicationsPage() {
   return (
     <div className="flex flex-col h-full">
       <Typography variant="h2">Tus postulaciones</Typography>
-      <DndContext sensors={sensors} onDragStart={onDragStart} onDragOver={onDragOver}>
+      <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver}>
         <div className="flex h-[calc(100%-50px)] gap-4 overflow-x-auto overflow-y-hidden mt-8 justify-between pb-1">
           <SortableContext items={sectionsIds}>
             {sections.map((section) => (

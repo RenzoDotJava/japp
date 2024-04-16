@@ -11,13 +11,15 @@ interface ApplicationModalProps {
   style?: Object;
   attributes?: DraggableAttributes;
   listeners?: SyntheticListenerMap;
+  onClose?: () => void;
 }
 
 const ApplicationModal = React.forwardRef<HTMLButtonElement, ApplicationModalProps>(
-  ({ children, className, style, attributes, listeners }, ref) => {
+  ({ children, className, style, attributes, listeners, onClose }, ref) => {
     const [open, setOpen] = useState(false)
 
     const handleSubmit = () => {
+      onClose && onClose()
       setOpen(false)
     }
 
