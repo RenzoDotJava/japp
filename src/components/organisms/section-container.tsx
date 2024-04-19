@@ -34,25 +34,25 @@ const SectionContainer: React.FC<SectionContainerProps> = ({ section, applicatio
   return (
     <div
       ref={setNodeRef}
-      className="bg-gray-100 min-w-[290px] min-h-full border rounded-md p-4 flex flex-col relative"
+      className="bg-gray-100 min-w-[160px] min-h-full border rounded-md p-4 flex flex-col flex-1 relative"
     >
-      <div
-        className="flex justify-between items-center sticky"
-      >
-        <Typography className="font-medium text-black" variant="h4">{section.title}</Typography>
+      {/* <div
+        className="flex justify-center items-center sticky"
+      > */}
+        <Typography className="font-medium text-center text-black" variant="h4">{section.title}</Typography>
         {/* <ApplicationModal
           className='min-h-8 min-w-8 px-2 py-1 rounded-full bg-primary text-primary-foreground hover:bg-primary/85'
           onClose={() => addApplication(section.id)}
         >
           <IoMdAdd className="min-h-4 min-w-4" />
         </ApplicationModal> */}
-        <Button
+        {/* <Button
           size={'xs'}
           onClick={() => addApplication(section.id)}
         >
           <IoMdAdd className="min-h-4 min-w-4" />
-        </Button>
-      </div>
+        </Button> */}
+      {/* </div> */}
       <div className="flex flex-1 flex-col gap-3 mt-4 overflow-y-auto overflow-x-hidden">
         <SortableContext items={applicationsIds}>
           {applications.map(application => (
