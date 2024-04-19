@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { sections } from '@/lib/consts'
 
 interface AplicationFormProps {
   handleSubmit: () => void
@@ -27,8 +28,11 @@ const formSchema = z.object({
   jobType: z.string().min(1, {
     message: "El tipo de trabajo es requerido",
   }),
+  sections: z.string().min(1, {
+    message: "La sección es requerida",
+  }),
   salary: z.string().optional(),
-  url: z.string().optional(),
+  url: z.string().optional()
 })
 
 const AplicationForm: React.FC<AplicationFormProps> = ({ handleSubmit }) => {

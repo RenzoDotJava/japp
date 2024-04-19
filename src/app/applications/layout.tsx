@@ -14,7 +14,7 @@ export default async function ApplicationsLayout({
   return (
     <Fragment>
       {session && <Header session={session} />}
-      <main className='p-6 md:p-10 box-border h-[calc(100vh-70px)]'>
+      <main className='p-6 box-border h-[calc(100vh-70px)]'>
         {children}
       </main>
     </Fragment>

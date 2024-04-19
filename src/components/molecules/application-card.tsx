@@ -38,21 +38,21 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
   return (
     <>
       <ApplicationModal
-        className='w-full bg-white shadow-sm py-3 min-h-[110px] rounded-md cursor-pointer'
+        className='w-full bg-white shadow-sm py-3 min-h-[95px] rounded-md cursor-pointer'
         ref={setNodeRef}
         style={style}
         attributes={attributes}
         listeners={listeners}
       >
         <div className='flex flex-col justify-center mx-4 gap-1 overflow-hidden'>
-          <Typography className='text-lg font-medium text-start truncate' variant="p">{application.content}</Typography>
+          <Typography className='text-base font-medium text-start truncate' variant="p">{application.content}</Typography>
           <div className='flex items-center gap-2 '>
             <MdWork />
-            <Typography className='text-start truncate' variant="p">
+            <Typography className='text-sm text-start truncate' variant="p">
               Google
             </Typography>
           </div>
-          <Typography className='flex items-center gap-2' variant="p">
+          <Typography className='text-sm flex items-center gap-2' variant="p">
             <MdHomeWork />
             Híbrido
           </Typography>

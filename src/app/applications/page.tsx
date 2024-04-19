@@ -3,40 +3,43 @@ import { useState } from "react"
 import { createPortal } from "react-dom";
 import { DndContext, DragStartEvent, DragOverlay, useSensors, PointerSensor, useSensor, DragOverEvent } from "@dnd-kit/core"
 import { arrayMove, SortableContext } from "@dnd-kit/sortable"
+import { IoMdAdd } from "react-icons/io";
 
 import { Typography } from "@/components/ui/typography"
 import SectionContainer from "@/components/organisms/section-container";
 import ApplicationCard from "@/components/molecules/application-card";
 import { generateId } from "@/lib/utils";
+import ApplicationModal from "@/components/organisms/application-modal";
+import { sections } from "@/lib/consts";
 import { Application, Id, Section } from "@/types"
 
-const sections: Section[] = [
-  {
-    id: 1,
-    title: 'Postulado'
-  },
-  {
-    id: 2,
-    title: 'En entrevista'
-  },
-  {
-    id: 3,
-    title: 'En negociación'
-  },
-  {
-    id: 4,
-    title: 'Aceptado'
-  },
-  {
-    id: 5,
-    title: 'Sin respuesta'
-  },
-  {
-    id: 6,
-    title: 'Rechazado'
+// const sections: Section[] = [
+//   {
+//     id: 1,
+//     title: 'Postulado'
+//   },
+//   {
+//     id: 2,
+//     title: 'En entrevista'
+//   },
+//   {
+//     id: 3,
+//     title: 'En negociación'
+//   },
+//   {
+//     id: 4,
+//     title: 'Aceptado'
+//   },
+//   {
+//     id: 5,
+//     title: 'Sin respuesta'
+//   },
+//   {
+//     id: 6,
+//     title: 'Rechazado'
 
-  }
-]
+//   }
+// ]
 
 export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([])
@@ -51,7 +54,7 @@ export default function ApplicationsPage() {
     }
   }))
 
-  const addApplication = (sectionId: Id) => {
+  const addApplication = (sectionId: Id = 1) => {
     const newApplication: Application = {
       id: generateId(),
       sectionId,
@@ -115,9 +118,19 @@ export default function ApplicationsPage() {
 
   return (
     <div className="flex flex-col h-full">
-      <Typography variant="h2">Tus postulaciones</Typography>
+      <div className="flex justify-between">
+        <Typography variant="h2">Tus postulaciones</Typography>
+        <ApplicationModal
+          className='bg-primary text-primary-foreground hover:bg-primary/90 min-h-9 rounded-md px-3 flex items-center gap-2 cursor-pointer'
+          onClose={() => addApplication()}
+        >
+          Agregar
+          <IoMdAdd className="min-h-4 min-w-4" />
+        </ApplicationModal> 
+        
+      </div>
       <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver}>
-        <div className="flex h-[calc(100%-50px)] gap-4 overflow-x-auto overflow-y-hidden mt-8 justify-between pb-1">
+        <div className="flex h-[calc(100%-50px)] gap-3 overflow-y-hidden mt-8 justify-between pb-1">
           <SortableContext items={sectionsIds}>
             {sections.map((section) => (
               <SectionContainer
