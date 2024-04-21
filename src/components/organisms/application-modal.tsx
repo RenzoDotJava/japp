@@ -4,22 +4,25 @@ import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import AplicationForm from '../molecules/application-form';
+import { Application } from '../../types';
 
 interface ApplicationModalProps {
   children: React.ReactNode;
   className?: string;
+  title?: string;
   style?: Object;
   attributes?: DraggableAttributes;
   listeners?: SyntheticListenerMap;
-  onClose?: () => void;
+  application?: Application;
+  onClose?: (application: Application) => void;
 }
 
 const ApplicationModal = React.forwardRef<HTMLButtonElement, ApplicationModalProps>(
-  ({ children, className, style, attributes, listeners, onClose }, ref) => {
+  ({ children, title = '', className, style, attributes, listeners, application, onClose }, ref) => {
     const [open, setOpen] = useState(false)
 
-    const handleSubmit = () => {
-      onClose && onClose()
+    const handleSubmit = (application: Application) => {
+      onClose && onClose(application)
       setOpen(false)
     }
 
@@ -36,9 +39,9 @@ const ApplicationModal = React.forwardRef<HTMLButtonElement, ApplicationModalPro
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Agregar postulación de trabajo</DialogTitle>
+            <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
-          <AplicationForm handleSubmit={handleSubmit} />
+          <AplicationForm application={application} handleSubmit={handleSubmit} />
         </DialogContent>
       </Dialog>
     )

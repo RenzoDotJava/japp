@@ -6,6 +6,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Typography } from '../ui/typography';
 import { Application } from '../../types';
 import ApplicationModal from '../organisms/application-modal';
+import { useApplicationStore } from '@/store/application';
 
 interface ApplicationCardProps {
   application: Application
@@ -13,12 +14,14 @@ interface ApplicationCardProps {
 
 const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
-    id: application.id,
+    id: application.id!,
     data: {
       type: "Application",
       application
     }
   })
+
+  const { updateApplication } = useApplicationStore()
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -43,18 +46,21 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
         style={style}
         attributes={attributes}
         listeners={listeners}
+        application={application}
+        title="Editar postulación de trabajo"
+        onClose={updateApplication}
       >
-        <div className='flex flex-col justify-center mx-4 gap-1 overflow-hidden'>
-          <Typography className='text-base font-medium text-start truncate' variant="p">{application.content}</Typography>
+        <div className='flex flex-col justify-center mx-4 gap-2 overflow-hidden'>
+          <Typography className='text-base font-medium text-start truncate' variant="p">{application.jobPosition}</Typography>
           <div className='flex items-center gap-2 '>
             <MdWork />
             <Typography className='text-sm text-start truncate' variant="p">
-              Google
+              {application.company}
             </Typography>
           </div>
           <Typography className='text-sm flex items-center gap-2' variant="p">
             <MdHomeWork />
-            Híbrido
+            {application.jobType}
           </Typography>
         </div>
       </ApplicationModal>
