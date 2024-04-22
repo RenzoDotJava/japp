@@ -19,13 +19,13 @@ const SectionContainer: React.FC<SectionContainerProps> = ({ section, applicatio
     data: {
       type: "Section",
       section
-    }
+    },
   })
 
   return (
     <div
       ref={setNodeRef}
-      className="bg-gray-100 min-w-[180px] min-h-full border rounded-md p-4 flex flex-col flex-1 relative"
+      className="bg-gray-100 min-w-[200px] min-h-full border rounded-md p-4 flex flex-col flex-1 relative"
     >
       <div
         className="flex justify-center items-center sticky"

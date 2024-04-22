@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdWork, MdHomeWork } from "react-icons/md";
+import { FaTrashAlt } from "react-icons/fa";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -13,6 +14,7 @@ interface ApplicationCardProps {
 }
 
 const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
+  const [mouseIsOver, setMouseIsOver] = useState(false)
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: application.id!,
     data: {
@@ -21,7 +23,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
     }
   })
 
-  const { updateApplication } = useApplicationStore()
+  const { updateApplication, deleteApplication } = useApplicationStore()
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -41,14 +43,15 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
   return (
     <>
       <ApplicationModal
-        className='w-full bg-white shadow-sm py-3 min-h-[95px] rounded-md cursor-pointer'
+        className='w-full bg-white shadow-sm py-3 min-h-[95px] rounded-md cursor-pointer relative'
         ref={setNodeRef}
         style={style}
         attributes={attributes}
         listeners={listeners}
         application={application}
-        title="Editar postulación de trabajo"
         onClose={updateApplication}
+        setMouseIsOver={setMouseIsOver}
+        title="Editar postulación de trabajo"
       >
         <div className='flex flex-col justify-center mx-4 gap-2 overflow-hidden'>
           <Typography className='text-base font-medium text-start truncate' variant="p">{application.jobPosition}</Typography>
@@ -63,6 +66,9 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
             {application.jobType}
           </Typography>
         </div>
+        {mouseIsOver && <button onClick={() => deleteApplication(application.id!)} className='absolute bottom-4 right-3.5 opacity-75 hover:opacity-100'>
+          <FaTrashAlt size={16} />
+        </button>}
       </ApplicationModal>
     </>
   )

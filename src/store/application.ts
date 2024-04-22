@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { Application } from '@/types'
+import { Application, Id } from '@/types'
 import { generateId } from '@/lib/utils'
 
 export type ApplicationState = {
@@ -10,10 +10,11 @@ export type ApplicationActions = {
   addApplication: (application: Application) => void
   setApplications: (applications: Application[]) => void
   updateApplication: (application: Application) => void
+  deleteApplication: (id: Id) => void
 }
 
 export const useApplicationStore = create<ApplicationState & ApplicationActions>((set) => ({
-  applications: [],
+  applications: [{ id: 1, jobPosition: '123123123', company: '123123123', jobType: 'Presencial', column: '1', salary: '', url: '' }],
   addApplication: (application: Application) => set((state) => ({
     applications: [
       ...state.applications,
@@ -25,5 +26,8 @@ export const useApplicationStore = create<ApplicationState & ApplicationActions>
   })),
   setApplications: (applications: Application[]) => set(() => ({
     applications: [...applications]
+  })),
+  deleteApplication: (id: Id) => set((state) => ({
+    applications: state.applications.filter((a) => a.id !== id)
   }))
 }))

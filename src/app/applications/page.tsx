@@ -22,7 +22,7 @@ export default function ApplicationsPage() {
 
   const sensors = useSensors(useSensor(PointerSensor, {
     activationConstraint: {
-      distance: 3,
+      distance: 5,
     }
   }))
 
@@ -79,7 +79,7 @@ export default function ApplicationsPage() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex justify-between">
-        <Typography variant="h2">Tus postulaciones</Typography>
+        <Typography className="text-2xl md:text-3xl" variant="h2">Tus postulaciones</Typography>
         <ApplicationModal
           className='bg-primary text-primary-foreground hover:bg-primary/90 min-h-9 rounded-md px-3 flex items-center gap-2 cursor-pointer'
           onClose={addApplication}

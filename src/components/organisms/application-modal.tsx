@@ -14,11 +14,12 @@ interface ApplicationModalProps {
   attributes?: DraggableAttributes;
   listeners?: SyntheticListenerMap;
   application?: Application;
+  setMouseIsOver?: (value: boolean) => void;
   onClose?: (application: Application) => void;
 }
 
 const ApplicationModal = React.forwardRef<HTMLButtonElement, ApplicationModalProps>(
-  ({ children, title = '', className, style, attributes, listeners, application, onClose }, ref) => {
+  ({ children, title = '', className, style, attributes, listeners, application, onClose, setMouseIsOver }, ref) => {
     const [open, setOpen] = useState(false)
 
     const handleSubmit = (application: Application) => {
@@ -32,6 +33,8 @@ const ApplicationModal = React.forwardRef<HTMLButtonElement, ApplicationModalPro
           className={className}
           ref={ref}
           style={style}
+          onMouseOver={() => setMouseIsOver && setMouseIsOver(true)}
+          onMouseLeave={() => setMouseIsOver && setMouseIsOver(false)}
           {...attributes}
           {...listeners}
         >
