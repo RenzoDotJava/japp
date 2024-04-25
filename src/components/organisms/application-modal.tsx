@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
@@ -14,27 +14,27 @@ interface ApplicationModalProps {
   attributes?: DraggableAttributes;
   listeners?: SyntheticListenerMap;
   application?: Application;
-  setMouseIsOver?: (value: boolean) => void;
-  onClose?: (application: Application) => void;
+  isOpen: boolean;
+  isLoading?: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onClose: (application: Application) => void;
 }
 
 const ApplicationModal = React.forwardRef<HTMLButtonElement, ApplicationModalProps>(
-  ({ children, title = '', className, style, attributes, listeners, application, onClose, setMouseIsOver }, ref) => {
-    const [open, setOpen] = useState(false)
+  ({ children, title = '', className, style, attributes, listeners, application, isOpen, isLoading, setIsOpen, onClose, onMouseEnter, onMouseLeave }, ref) => {
 
-    const handleSubmit = (application: Application) => {
-      onClose && onClose(application)
-      setOpen(false)
-    }
+    const handleSubmit = (application: Application) => onClose(application)
 
     return (
-      <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
+      <Dialog open={isOpen} onOpenChange={(isOpen) => setIsOpen(isOpen)}>
         <DialogTrigger
           className={className}
           ref={ref}
           style={style}
-          onMouseOver={() => setMouseIsOver && setMouseIsOver(true)}
-          onMouseLeave={() => setMouseIsOver && setMouseIsOver(false)}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
           {...attributes}
           {...listeners}
         >
@@ -44,7 +44,7 @@ const ApplicationModal = React.forwardRef<HTMLButtonElement, ApplicationModalPro
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
-          <AplicationForm application={application} handleSubmit={handleSubmit} />
+          <AplicationForm application={application} handleSubmit={handleSubmit} isLoading={isLoading} />
         </DialogContent>
       </Dialog>
     )

@@ -13,6 +13,7 @@ import { Application } from '@/types'
 
 interface AplicationFormProps {
   application?: Application
+  isLoading?: boolean
   handleSubmit: (application: Application) => void
 }
 
@@ -39,14 +40,14 @@ const formSchema = z.object({
   url: z.string().optional()
 })
 
-const AplicationForm: React.FC<AplicationFormProps> = ({ application, handleSubmit }) => {
+const AplicationForm: React.FC<AplicationFormProps> = ({ application, isLoading, handleSubmit }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       jobPosition: application?.jobPosition || "",
       company: application?.company || "",
       url: application?.url || "",
-      salary: application?.salary || "",
+      salary: application?.salary?.toString() || "",
       jobType: application?.jobType || "",
       column: application?.column.toString() || ""
     },
@@ -158,7 +159,7 @@ const AplicationForm: React.FC<AplicationFormProps> = ({ application, handleSubm
             </FormItem>
           )}
         />
-        <Button className='mt-2' type="submit">Guardar</Button>
+        <Button disabled={isLoading} className='mt-2' type="submit">Guardar</Button>
       </form>
     </Form>
   )
